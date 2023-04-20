@@ -21,7 +21,7 @@ public class EnvMapperTests
         Environment.SetEnvironmentVariable("FieldTwo", "Test2");
         var test = EnvMapper.Env.MapConfiguration<FieldModel>();
         Assert.Equal(test.FieldOne, Environment.GetEnvironmentVariable("One"));
-        Assert.Equal(test.FieldOne, Environment.GetEnvironmentVariable("FieldTwo"));
+        Assert.Equal(test.FieldTwo, Environment.GetEnvironmentVariable("FieldTwo"));
     }
 
     [Fact]
