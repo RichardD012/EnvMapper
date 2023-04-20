@@ -3,7 +3,7 @@ name: EnvMapper Tests
 on:
   push:
     branches:
-      - 'develop'
+      - '*'
 
 jobs:
   deploy:
