@@ -32,7 +32,7 @@ dotnet add package EnvMapper
 var config = EnvMapper.Env.MapConfiguration<TType>();
 ```
 
-If properties that are marked as required are not found, a `EnvMapperException` will be thrown, which contains a list of missing properties.
+If properties that are marked as required are not found or are of the wrong type (ie a `string` instead of an `int`), a `EnvMapperException` will be thrown, which contains a list of error properties.
 
 ## Example
 

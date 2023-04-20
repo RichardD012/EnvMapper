@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +8,12 @@ namespace EnvMapper
 {
     public static class Env
     {
-
         public static TConfigType MapConfiguration<TConfigType>()
-                where TConfigType : class, new()
+            where TConfigType : class, new()
         {
-            var missingEnvironmentVariables = new List<string>();
-            var properties = typeof(TConfigType).GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(DataMemberAttribute)));
+            var invalidVariables = new List<FieldError>();
+            var properties = typeof(TConfigType).GetProperties()
+                .Where(prop => Attribute.IsDefined(prop, typeof(DataMemberAttribute)));
             var returnOptions = new TConfigType();
             foreach (var member in properties)
             {
@@ -29,38 +28,80 @@ namespace EnvMapper
                 {
                     propertyName = member.Name;
                 }
-                var tempValue = ReadEnvironmentVariable(propertyName, ref missingEnvironmentVariables, dataMemberAttribute.IsRequired);
-                member.SetValue(returnOptions, tempValue, null);
+
+                var (success, tempValue) = ReadEnvironmentVariable(propertyName, dataMemberAttribute.IsRequired);
+                if (success)
+                {
+                    try
+                    {
+                        var parsedValue = ParseValue(member, tempValue);
+                        member.SetValue(returnOptions, parsedValue, null);
+                    }
+                    catch (FormatException)
+                    {
+                        invalidVariables.Add(new FieldError(propertyName, FieldErrorType.InvalidFormat));
+                    }
+                    catch (OverflowException)
+                    {
+                        invalidVariables.Add(new FieldError(propertyName, FieldErrorType.InvalidFormat));
+                    }
+                }
+                else
+                {
+                    invalidVariables.Add(new FieldError(propertyName, FieldErrorType.Missing));
+                }
             }
-            if (missingEnvironmentVariables.Count > 0)
+
+            if (invalidVariables.Count > 0)
             {
-                /*var message = Environment.NewLine;
-                message += "*************** Unable to process configuration! **************" + Environment.NewLine;
-                message += "**** The following environment variables must be defined:  ****" + Environment.NewLine;
-                message += string.Join(", ", missingEnvironmentVariables);
-                message += Environment.NewLine;
-                message += "***************************************************************" + Environment.NewLine;*/
-                throw new EnvMapperException("Unable to process configuration - Missing Variables", missingEnvironmentVariables);
-                //throw new Exception(message);
+                throw new EnvMapperException("Unable to process configuration", invalidVariables);
             }
+
             return returnOptions;
         }
 
-        private static string ReadEnvironmentVariable(string variableName, ref List<string> missingEnvironmentVariables, bool required = true)
+        private static object ParseValue(PropertyInfo property, string value)
+        {
+            if (property.PropertyType == typeof(int) || property.PropertyType == typeof(int?))
+            {
+                return int.Parse(value);
+            }
+
+            if (property.PropertyType == typeof(long) || property.PropertyType == typeof(long?))
+            {
+                return long.Parse(value);
+            }
+
+            if (property.PropertyType == typeof(short) || property.PropertyType == typeof(short?))
+            {
+                return short.Parse(value);
+            }
+
+            if (property.PropertyType == typeof(double) || property.PropertyType == typeof(double?))
+            {
+                return double.Parse(value);
+            }
+
+            if (property.PropertyType == typeof(float) || property.PropertyType == typeof(float?))
+            {
+                return float.Parse(value);
+            }
+
+            return value;
+        }
+
+        private static (bool, string) ReadEnvironmentVariable(string variableName, bool required = true)
         {
             var value = Environment.GetEnvironmentVariable(variableName);
             if (string.IsNullOrWhiteSpace(value))
             {
                 if (required)
-                    missingEnvironmentVariables.Add(variableName);
-                return string.Empty;
+                    return (false, null);
+                return (true, null);
             }
-            else
-            {
-                //we don't care about new lines
-                value = value.Replace("\r", "").Replace("\n", "").Trim();
-            }
-            return value;
+            //we don't care about new lines
+            value = value.Replace("\r", "").Replace("\n", "").Trim();
+            return (true, value);
         }
     }
 }
