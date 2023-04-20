@@ -16,6 +16,8 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/RichardD012/EnvMapper</RepositoryUrl>
     <RootNamespace>EnvMapper</RootNamespace>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
