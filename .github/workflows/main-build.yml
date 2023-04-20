@@ -1,4 +1,4 @@
-name: "Deploy to NuGet"
+name: "EnvMapper Build"
 
 on:
   push:
