@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvMapper", "src\EnvMapper\EnvMapper.csproj", "{A31D38ED-5D68-443F-8585-19DF1085F19B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvMapper.Tests", "test\EnvMapper.Tests\EnvMapper.Tests.csproj", "{1A2893B4-1970-4B74-A0BC-DADA9E13E177}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,13 @@ Global
 		{A31D38ED-5D68-443F-8585-19DF1085F19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A31D38ED-5D68-443F-8585-19DF1085F19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A31D38ED-5D68-443F-8585-19DF1085F19B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C022B56-85A7-4B88-BC5A-F1C5EB903CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C022B56-85A7-4B88-BC5A-F1C5EB903CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C022B56-85A7-4B88-BC5A-F1C5EB903CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C022B56-85A7-4B88-BC5A-F1C5EB903CD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A2893B4-1970-4B74-A0BC-DADA9E13E177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A2893B4-1970-4B74-A0BC-DADA9E13E177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A2893B4-1970-4B74-A0BC-DADA9E13E177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A2893B4-1970-4B74-A0BC-DADA9E13E177}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

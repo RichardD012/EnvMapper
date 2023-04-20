@@ -45,6 +45,10 @@ namespace EnvMapper
                     {
                         invalidVariables.Add(new FieldError(propertyName, FieldErrorType.InvalidFormat));
                     }
+                    catch (ArgumentException)
+                    {
+                        invalidVariables.Add(new FieldError(propertyName, FieldErrorType.InvalidValue));
+                    }
                 }
                 else
                 {
@@ -86,8 +90,25 @@ namespace EnvMapper
             {
                 return float.Parse(value);
             }
+            
+            if (property.PropertyType.IsEnum || IsNullableEnum(property.PropertyType))
+            {
+                var enumType = property.PropertyType;
+                if (IsNullableEnum(enumType))
+                {
+                    enumType = Nullable.GetUnderlyingType(enumType);
+                }
+
+                if (enumType != null) return Enum.Parse(enumType, value);
+            }
 
             return value;
+        }
+        
+        private static bool IsNullableEnum(this Type t)
+        {
+            var u = Nullable.GetUnderlyingType(t);
+            return (u != null) && u.IsEnum;
         }
 
         private static (bool, string) ReadEnvironmentVariable(string variableName, bool required = true)

@@ -42,6 +42,7 @@ namespace EnvMapper
     public enum FieldErrorType
     {
         Missing,
-        InvalidFormat
+        InvalidFormat,
+        InvalidValue
     }
 }
