@@ -5,7 +5,7 @@ namespace EnvMapper.Tests;
 [DataContract]
 public class FieldModel
 {
-    [DataMember(Name="One", IsRequired = true)]
+    [DataMember(Name = "One", IsRequired = true)]
     public string? FieldOne { get; set; }
     [DataMember]
     public string? FieldTwo { get; set; }

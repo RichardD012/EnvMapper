@@ -91,23 +91,23 @@ namespace EnvMapper
                 return float.Parse(value);
             }
             
-            if (property.PropertyType.IsEnum || IsNullableEnum(property.PropertyType))
+            if (IsNullableEnum(property.PropertyType, out var underlyingType) || property.PropertyType.IsEnum)
             {
                 var enumType = property.PropertyType;
-                if (IsNullableEnum(enumType))
+                if (underlyingType != null)
                 {
                     enumType = Nullable.GetUnderlyingType(enumType);
                 }
-
                 if (enumType != null) return Enum.Parse(enumType, value);
             }
 
             return value;
         }
         
-        private static bool IsNullableEnum(this Type t)
+        private static bool IsNullableEnum(this Type t, out Type result)
         {
             var u = Nullable.GetUnderlyingType(t);
+            result = u;
             return (u != null) && u.IsEnum;
         }
 
