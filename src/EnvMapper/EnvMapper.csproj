@@ -11,10 +11,10 @@
     <OutputType>Library</OutputType>
     <PackageId>EnvMapper</PackageId>
     <PackageTags>dotnet;env;dotfiles;mapping</PackageTags>
-    <PackageProjectUrl>https://github.com/RichardD012/env-mapper</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/RichardD012/EnvMapper</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/RichardD012/env-mapper</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RichardD012/EnvMapper</RepositoryUrl>
     <RootNamespace>EnvMapper</RootNamespace>
   </PropertyGroup>
 
