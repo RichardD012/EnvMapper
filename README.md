@@ -62,4 +62,4 @@ Console.WriteLine($"Bar={config.Bar}");//This may be present
 Console.WriteLine($"Otherfield={config.OtherField}");//This may be present
 ```
 
-Note: in the above example the variables that will be checked are `Foo`, `Bar`, and `Override`. If there is an environment variable `OtherField`, the reader will not check that as the DataMember signified on the variable should be "Override".
+Note: in the above example the variables that will be checked are `Foo`, `Bar`, and `Override`. If there is an environment variable `OtherField`, the reader will not check that as the DataMember signified on the variable should be `Override`.
