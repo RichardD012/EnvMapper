@@ -10,7 +10,6 @@ namespace EnvMapper
     public static class EnvMapper
     {
 
-
         public static TConfigType MapConfiguration<TConfigType>()
                 where TConfigType : class, new()
         {
