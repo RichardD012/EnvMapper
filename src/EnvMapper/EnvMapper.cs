@@ -96,9 +96,9 @@ namespace EnvMapper
                 var enumType = property.PropertyType;
                 if (underlyingType != null)
                 {
-                    enumType = Nullable.GetUnderlyingType(enumType);
+                    enumType = underlyingType;
                 }
-                if (enumType != null) return Enum.Parse(enumType, value);
+                return Enum.Parse(enumType, value);
             }
 
             return value;
