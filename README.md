@@ -1,6 +1,8 @@
 # EnvMapper
 
 [![EnvMapper Build](https://github.com/RichardD012/EnvMapper/actions/workflows/main-build.yml/badge.svg)](https://github.com/RichardD012/EnvMapper/actions/workflows/main-build.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![NuGet version](https://badge.fury.io/nu/EnvMapper.svg)](https://www.nuget.org/packages/EnvMapper)
 
 A .NET library to map environment variables to a C# object. This is useful when deploying to containerized environments where environment variables may be injected before starting up.
 
