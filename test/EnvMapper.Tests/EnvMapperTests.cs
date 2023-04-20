@@ -13,17 +13,17 @@ public class EnvMapperTests
         Assert.Equal(test.FieldOne, Environment.GetEnvironmentVariable("One"));
         Assert.Null(test.FieldTwo);
     }
-    
+
     [Fact]
     public void LoadAllTest()
     {
         Environment.SetEnvironmentVariable("One", "Test1");
-        Environment.SetEnvironmentVariable("FieldTwo", "Test1");
+        Environment.SetEnvironmentVariable("FieldTwo", "Test2");
         var test = EnvMapper.Env.MapConfiguration<FieldModel>();
         Assert.Equal(test.FieldOne, Environment.GetEnvironmentVariable("One"));
-        Assert.Equal(test.FieldTwo, Environment.GetEnvironmentVariable("FieldTwo"));
+        Assert.Equal(test.FieldOne, Environment.GetEnvironmentVariable("FieldTwo"));
     }
-    
+
     [Fact]
     public void MissingFieldTest()
     {
@@ -31,7 +31,7 @@ public class EnvMapperTests
         Environment.SetEnvironmentVariable("FieldTwo", null);
         Assert.Throws<EnvMapperException>(() => EnvMapper.Env.MapConfiguration<FieldModel>());
     }
-    
+
     [Fact]
     public void LoadIntTest()
     {
@@ -39,14 +39,14 @@ public class EnvMapperTests
         var test = EnvMapper.Env.MapConfiguration<IntModel>();
         Assert.Equal(test.IntField, 1);
     }
-    
+
     [Fact]
     public void LoadInvalidIntTest()
     {
         Environment.SetEnvironmentVariable("IntField", "Number");
         Assert.Throws<EnvMapperException>(() => EnvMapper.Env.MapConfiguration<IntModel>());
     }
-    
+
     [Fact]
     public void LoadDoubleTest()
     {
@@ -54,16 +54,16 @@ public class EnvMapperTests
         var test = EnvMapper.Env.MapConfiguration<DoubleModel>();
         Assert.Equal(test.DoubleField, 1.5d);
     }
-    
+
     [Fact]
     public void LoadInvalidDoubleTest()
     {
         Environment.SetEnvironmentVariable("DoubleField", "Number");
         Assert.Throws<EnvMapperException>(() => EnvMapper.Env.MapConfiguration<DoubleModel>());
     }
-    
+
     //Test Short, Float, Long
-    
+
     [Fact]
     public void LoadEnumTest()
     {
@@ -71,7 +71,7 @@ public class EnvMapperTests
         var test = EnvMapper.Env.MapConfiguration<EnumModel>();
         Assert.Equal(test.EnumField, TestEnum.ValidValue);
     }
-    
+
     [Fact]
     public void LoadInvalidEnumTest()
     {
