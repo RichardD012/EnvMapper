@@ -1,5 +1,7 @@
 # EnvMapper
 
+[![EnvMapper Build](https://github.com/RichardD012/EnvMapper/actions/workflows/main-build.yml/badge.svg)](https://github.com/RichardD012/EnvMapper/actions/workflows/main-build.yml)
+
 A .NET library to map environment variables to a C# object. This is useful when deploying to containerized environments where environment variables may be injected before starting up.
 
 ## Usage
