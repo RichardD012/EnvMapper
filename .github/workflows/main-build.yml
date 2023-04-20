@@ -4,9 +4,6 @@ on:
   release:
     types:
     - published
-  push:
-    tags:
-    - 'v*'
 
 env:
   PROJECT_PATH: 'src/EnvMapper/EnvMapper.csproj'
