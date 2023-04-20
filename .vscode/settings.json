@@ -1,0 +1,17 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "files.exclude": {
+        "**/node_modules/": true,
+        "**/bower_components/":true,
+        "**/bin/":true,
+        "**/obj/":true, 
+        "**/project.lock.json":true,
+        "**/src/build/":true,
+        "build/output":true ,
+        "**/build/output":true,
+        "**/.vs/": true,
+        "build/":true,
+        "**/.idea/":true
+    },
+    "workbench.colorCustomizations": {},
+}

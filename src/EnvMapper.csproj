@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>EnvMapper</Title>
+    <Description>A .NET library to map environment variables to a strongly typed class</Description>
+    <AssemblyTitle>EnvMapper</AssemblyTitle>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <PackageVersion>1.0.0</PackageVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>EnvMapper</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PackageId>EnvMapper</PackageId>
+    <PackageTags>dotnet;env;dotfiles;mapping</PackageTags>
+    <PackageProjectUrl>https://github.com/RichardD012/env-mapper</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/RichardD012/env-mapper</RepositoryUrl>
+    <RootNamespace>EnvMapper</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+
+</Project>
