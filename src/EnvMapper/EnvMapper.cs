@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 
 namespace EnvMapper
 {
-    public static class EnvMapper
+    public static class Env
     {
 
         public static TConfigType MapConfiguration<TConfigType>()
