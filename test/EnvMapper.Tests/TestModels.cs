@@ -30,6 +30,9 @@ public class EnumModel
 {
     [DataMember]
     public TestEnum? EnumField { get; set; }
+    
+    [DataMember(Name="Other")]
+    public TestEnum EnumField2 { get; set; }
 }
 
 public enum TestEnum

@@ -68,14 +68,17 @@ public class EnvMapperTests
     public void LoadEnumTest()
     {
         Environment.SetEnvironmentVariable("EnumField", "ValidValue");
+        Environment.SetEnvironmentVariable("Other", "ValidValue");
         var test = EnvMapper.Env.MapConfiguration<EnumModel>();
         Assert.Equal(test.EnumField, TestEnum.ValidValue);
+        Assert.Equal(test.EnumField2, TestEnum.ValidValue);
     }
 
     [Fact]
     public void LoadInvalidEnumTest()
     {
         Environment.SetEnvironmentVariable("EnumField", "InvalidValue");
+        Environment.SetEnvironmentVariable("Other", "InvalidValue");
         Assert.Throws<EnvMapperException>(() => EnvMapper.Env.MapConfiguration<EnumModel>());
     }
 }
