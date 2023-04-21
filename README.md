@@ -17,7 +17,7 @@ Visual Studio:
 PM> Install-Package EnvMapper
 ```
 
-.NET Core CLI:
+.NET CLI:
 
 ```bash
 dotnet add package EnvMapper
