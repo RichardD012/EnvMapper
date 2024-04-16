@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace EnvMapper.Tests;
@@ -71,7 +72,23 @@ public class EnvMapperTests
         Environment.SetEnvironmentVariable("Other", "ValidValue");
         var test = EnvMapper.Env.MapConfiguration<EnumModel>();
         Assert.Equal(test.EnumField, TestEnum.ValidValue);
-        Assert.Equal(test.EnumField2, TestEnum.ValidValue);
+        Assert.Equal(TestEnum.ValidValue, test.EnumField2);
+    }
+    
+    [Fact]
+    public void LoadRequiredTest()
+    {
+        Environment.SetEnvironmentVariable("RequiredString", "ValidValue");
+        Environment.SetEnvironmentVariable("Other", "ValidValue");
+        var test = EnvMapper.Env.MapConfiguration<RequiredModel>();
+        Assert.Equal("ValidValue", test.RequiredString);
+        Assert.Null(test.OtherString);
+    }
+    
+    [Fact]
+    public void LoadInvalidRequiredTest()
+    {
+        Assert.Throws<EnvMapperException>(() => EnvMapper.Env.MapConfiguration<RequiredModel>());
     }
 
     [Fact]

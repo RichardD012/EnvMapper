@@ -35,6 +35,16 @@ public class EnumModel
     public TestEnum EnumField2 { get; set; }
 }
 
+[DataContract]
+public class RequiredModel
+{
+    [DataMember(Name="RequiredString")]
+    public required string RequiredString { get; set; }
+    
+    [DataMember(Name="OtherString")]
+    public string? OtherString { get; set; }
+}
+
 public enum TestEnum
 {
     ValidValue

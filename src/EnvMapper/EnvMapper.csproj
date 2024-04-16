@@ -6,7 +6,6 @@
     <AssemblyTitle>EnvMapper</AssemblyTitle>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <PackageVersion>1.0.0</PackageVersion>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>EnvMapper</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>EnvMapper</PackageId>
@@ -19,12 +18,17 @@
     <RootNamespace>EnvMapper</RootNamespace>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="../../LICENSE" Pack="true" PackagePath="" />
     <None Include="../../README.md" Pack="true" PackagePath="" />
   </ItemGroup>
-
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <DefineConstants>NET8</DefineConstants>
+  </PropertyGroup>
 
 </Project>

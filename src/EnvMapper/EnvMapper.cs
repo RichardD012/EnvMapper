@@ -9,12 +9,14 @@ namespace EnvMapper
     public static class Env
     {
         public static TConfigType MapConfiguration<TConfigType>()
-            where TConfigType : class, new()
+            where TConfigType : class
         {
             var invalidVariables = new List<FieldError>();
             var properties = typeof(TConfigType).GetProperties()
                 .Where(prop => Attribute.IsDefined(prop, typeof(DataMemberAttribute)));
-            var returnOptions = new TConfigType();
+            //var returnOptions = new TConfigType();
+            var returnOptions = Activator.CreateInstance<TConfigType>(); // Creates an instance using parameterless constructor
+
             foreach (var member in properties)
             {
                 var dataMemberAttribute = member.GetCustomAttribute<DataMemberAttribute>();
@@ -22,14 +24,19 @@ namespace EnvMapper
                 {
                     continue;
                 }
-
                 var propertyName = dataMemberAttribute.Name;
                 if (string.IsNullOrWhiteSpace(propertyName))
                 {
                     propertyName = member.Name;
                 }
+#if NET8
+                var otherRequiredAttribute = member.GetCustomAttribute<System.Runtime.CompilerServices.RequiredMemberAttribute>();
+                var (success, tempValue) = ReadEnvironmentVariable(propertyName, dataMemberAttribute.IsRequired || (otherRequiredAttribute != null));
+#else
+                // Default code if none of the above frameworks are targeted
+                var (success, tempValue) = ReadEnvironmentVariable(propertyName, dataMemberAttribute.IsRequired );
 
-                var (success, tempValue) = ReadEnvironmentVariable(propertyName, dataMemberAttribute.IsRequired);
+#endif
                 if (success)
                 {
                     try
