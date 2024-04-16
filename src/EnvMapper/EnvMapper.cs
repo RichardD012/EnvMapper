@@ -71,35 +71,49 @@ namespace EnvMapper
             return returnOptions;
         }
 
-        private static object ParseValue(PropertyInfo property, string value)
+        private static object? ParseValue(PropertyInfo property, string? value)
         {
             if (property.PropertyType == typeof(int) || property.PropertyType == typeof(int?))
             {
+                if (value == null)
+                    return default(int?);
                 return int.Parse(value);
             }
 
             if (property.PropertyType == typeof(long) || property.PropertyType == typeof(long?))
             {
+                if (value == null)
+                    return default(long?);
                 return long.Parse(value);
             }
 
             if (property.PropertyType == typeof(short) || property.PropertyType == typeof(short?))
             {
+                if (value == null)
+                    return default(short?);
                 return short.Parse(value);
             }
 
             if (property.PropertyType == typeof(double) || property.PropertyType == typeof(double?))
-            {
+            { 
+                if (value == null)
+                    return default(double?);
                 return double.Parse(value);
             }
 
             if (property.PropertyType == typeof(float) || property.PropertyType == typeof(float?))
             {
+                if (value == null)
+                    return default(float?);
                 return float.Parse(value);
             }
             
             if (IsNullableEnum(property.PropertyType, out var underlyingType) || property.PropertyType.IsEnum)
             {
+                if (value == null)
+                {
+                    return null;
+                }
                 var enumType = property.PropertyType;
                 if (underlyingType != null)
                 {
@@ -111,14 +125,14 @@ namespace EnvMapper
             return value;
         }
         
-        private static bool IsNullableEnum(this Type t, out Type result)
+        private static bool IsNullableEnum(this Type t, out Type? result)
         {
             var u = Nullable.GetUnderlyingType(t);
             result = u;
             return (u != null) && u.IsEnum;
         }
 
-        private static (bool, string) ReadEnvironmentVariable(string variableName, bool required = true)
+        private static (bool, string?) ReadEnvironmentVariable(string variableName, bool required = true)
         {
             var value = Environment.GetEnvironmentVariable(variableName);
             if (string.IsNullOrWhiteSpace(value))
